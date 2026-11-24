@@ -3,6 +3,8 @@
  * token header, JSON handling and error shape live in exactly one place.
  */
 const TOKEN_KEY = 'memorylane.token'
+// In development Vite proxies /api to the backend. In production set VITE_API_URL to the API's address.
+const API_BASE = (import.meta.env.VITE_API_URL ?? '').replace(/\/$/, '')
 
 export const tokenStore = {
   get: () => { try { return localStorage.getItem(TOKEN_KEY) } catch { return null } },
@@ -45,7 +47,7 @@ export async function request(path, { method = 'GET', body, auth = true } = {}) 
 
   let res
   try {
-    res = await fetch(`/api${path}`, { method, headers, body: body !== undefined ? JSON.stringify(body) : undefined })
+    res = await fetch(`${API_BASE}/api${path}`, { method, headers, body: body !== undefined ? JSON.stringify(body) : undefined })
   } catch {
     throw new ApiError("Can't reach the server. Check your connection and try again.", 0)
   }
