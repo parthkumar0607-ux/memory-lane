@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
 import Logo from '../ui/Logo'
 import Button from '../ui/Button'
+import { useAuth } from '../../hooks/useAuth'
 
 const links = [
   { label: 'Features', href: '#features' },
@@ -13,6 +14,7 @@ const links = [
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
+  const { isAuthenticated } = useAuth()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24)
@@ -39,8 +41,14 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Button to="/login" variant="ghost" size="sm">Log in</Button>
-          <Button to="/register" size="sm">Start your album</Button>
+          {isAuthenticated ? (
+            <Button to="/dashboard" size="sm">Open your album</Button>
+          ) : (
+            <>
+              <Button to="/login" variant="ghost" size="sm">Log in</Button>
+              <Button to="/register" size="sm">Start your album</Button>
+            </>
+          )}
         </div>
 
         <button
@@ -70,8 +78,14 @@ export default function Navbar() {
                 </a>
               ))}
               <div className="mt-5 flex flex-col gap-3">
-                <Button to="/register" size="lg">Start your album</Button>
-                <Button to="/login" variant="secondary" size="lg">Log in</Button>
+                {isAuthenticated ? (
+                  <Button to="/dashboard" size="lg">Open your album</Button>
+                ) : (
+                  <>
+                    <Button to="/register" size="lg">Start your album</Button>
+                    <Button to="/login" variant="secondary" size="lg">Log in</Button>
+                  </>
+                )}
               </div>
             </nav>
           </motion.div>

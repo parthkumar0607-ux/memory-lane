@@ -76,22 +76,22 @@ const SCENES = {
       <path d="M-10 200 Q100 170 200 205 T320 195 V300 H-10Z" fill="#241f2b" />
       <path d="M150 240 C128 232 126 204 148 182 C146 202 160 202 156 178 C178 198 184 230 150 240Z" fill="#e8873f" />
       <path d="M150 240 C138 234 140 216 150 204 C152 216 162 218 158 230Z" fill="#f6cf6e" />
-      <path d="M118 246 L184 238 M122 238 L180 250" stroke="#5e4331" stroke-width="6" stroke-linecap="round" />
+      <path d="M118 246 L184 238 M122 238 L180 250" stroke="#5e4331" strokeWidth="6" strokeLinecap="round" />
       <path d="M50 252 q10 -26 22 0z M236 254 q10 -24 22 0z" fill="#17131c" />
     </>
   ),
   cafe: (
     <>
       <rect width="300" height="300" fill="#e7d6bc" />
-      <rect x="30" y="34" width="110" height="130" fill="#cfe0dd" stroke="#7a5a43" stroke-width="8" />
-      <path d="M85 34 V164 M30 99 H140" stroke="#7a5a43" stroke-width="5" />
+      <rect x="30" y="34" width="110" height="130" fill="#cfe0dd" stroke="#7a5a43" strokeWidth="8" />
+      <path d="M85 34 V164 M30 99 H140" stroke="#7a5a43" strokeWidth="5" />
       <rect x="168" y="46" width="96" height="70" fill="#d9674f" opacity=".85" />
       <circle cx="216" cy="81" r="18" fill="#f4ecdd" opacity=".85" />
       <rect y="210" width="300" height="90" fill="#8b6a50" />
       <rect y="206" width="300" height="10" fill="#6a4c37" />
       <ellipse cx="108" cy="204" rx="40" ry="8" fill="#f4ecdd" />
-      <path d="M78 176 h60 v22 q0 14 -30 14 t-30 -14z" fill="#f4ecdd" stroke="#cdb994" stroke-width="2" />
-      <path d="M92 150 q-6 -12 0 -22 M110 154 q-6 -12 0 -24 M126 150 q-6 -12 0 -22" stroke="#9a8d7e" stroke-width="3" fill="none" stroke-linecap="round" opacity=".7" />
+      <path d="M78 176 h60 v22 q0 14 -30 14 t-30 -14z" fill="#f4ecdd" stroke="#cdb994" strokeWidth="2" />
+      <path d="M92 150 q-6 -12 0 -22 M110 154 q-6 -12 0 -24 M126 150 q-6 -12 0 -22" stroke="#9a8d7e" strokeWidth="3" fill="none" strokeLinecap="round" opacity=".7" />
       <ellipse cx="208" cy="204" rx="30" ry="7" fill="#f4ecdd" />
       <rect x="184" y="170" width="48" height="30" rx="4" fill="#c99a3e" />
     </>

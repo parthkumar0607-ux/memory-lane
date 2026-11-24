@@ -20,4 +20,7 @@ class Settings(BaseSettings):
 
 @lru_cache
 def get_settings() -> Settings:
-    return Settings()
+    settings = Settings()
+    if settings.app_env == "production" and settings.jwt_secret.startswith(("dev-only", "change-me")):
+        raise RuntimeError("Set a strong JWT_SECRET before running in production.")
+    return settings
