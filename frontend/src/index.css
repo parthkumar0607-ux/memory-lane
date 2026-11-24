@@ -1,0 +1,107 @@
+@import "tailwindcss";
+
+/* ───────────────────────────────────────────────
+   Memory Lane design tokens
+   Warm paper, muted ink, a little film-photo colour.
+   ─────────────────────────────────────────────── */
+@theme {
+  --font-serif: "Fraunces", Georgia, "Times New Roman", serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-hand: "Caveat", "Segoe Script", cursive;
+
+  --color-cream-50: #fbf7ee;
+  --color-cream-100: #f6efe1;
+  --color-cream-200: #eee4d0;
+  --color-cream-300: #e2d4b9;
+  --color-cream-400: #cdb994;
+
+  --color-ink-900: #26211d;
+  --color-ink-800: #36302a;
+  --color-ink-700: #4a423a;
+  --color-ink-500: #7a6e62;
+  --color-ink-400: #9a8d7e;
+
+  --color-brown-600: #7a5a43;
+  --color-brown-700: #5e4331;
+
+  --color-clay-500: #b5654a;
+  --color-clay-600: #9c5139;
+  --color-sage-500: #8a9a7b;
+  --color-mustard-500: #c99a3e;
+  --color-rose-300: #e3b7a8;
+
+  --shadow-paper: 0 1px 1px rgb(60 40 20 / 0.06), 0 6px 14px -4px rgb(60 40 20 / 0.14), 0 22px 40px -18px rgb(60 40 20 / 0.22);
+  --shadow-lift: 0 2px 2px rgb(60 40 20 / 0.06), 0 14px 26px -6px rgb(60 40 20 / 0.2), 0 36px 60px -24px rgb(60 40 20 / 0.3);
+  --shadow-soft: 0 1px 2px rgb(60 40 20 / 0.06), 0 8px 20px -10px rgb(60 40 20 / 0.18);
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    margin: 0;
+    background-color: var(--color-cream-100);
+    color: var(--color-ink-800);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+    font-optical-sizing: auto;
+    color: var(--color-ink-900);
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    font-weight: 500;
+  }
+  ::selection { background: var(--color-rose-300); color: var(--color-ink-900); }
+  :focus-visible {
+    outline: 2px solid var(--color-clay-500);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  /* Subtle paper grain, drawn with an inline SVG noise filter — no image files needed */
+  .paper-texture {
+    background-color: var(--color-cream-100);
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.35  0 0 0 0 0.25  0 0 0 0 0.15  0 0 0 0.09 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  .paper-card {
+    background-color: var(--color-cream-50);
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.35  0 0 0 0 0.25  0 0 0 0 0.15  0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-clay-600);
+  }
+  .container-page {
+    width: 100%;
+    max-width: 76rem;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) { .container-page { padding-inline: 2.5rem; } }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
