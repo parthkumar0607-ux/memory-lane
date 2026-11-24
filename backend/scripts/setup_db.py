@@ -19,6 +19,7 @@ ENV = ROOT / ".env"
 
 
 def ensure_env(database_url: str | None) -> None:
+    """Create/update .env. The URL is passed in only once we know it works."""
     text = ENV.read_text() if ENV.exists() else (ROOT / ".env.example").read_text()
     if re.search(r"^JWT_SECRET=(change-me.*)?$", text, re.M):
         text = re.sub(r"^JWT_SECRET=.*$", f"JWT_SECRET={secrets.token_urlsafe(48)}", text, flags=re.M)
@@ -30,11 +31,17 @@ def ensure_env(database_url: str | None) -> None:
 
 
 def main() -> None:
-    ensure_env(sys.argv[1] if len(sys.argv) > 1 else None)
-
     from sqlalchemy import create_engine, text
     from sqlalchemy.engine import make_url
     from sqlalchemy.exc import OperationalError
+
+    given = sys.argv[1] if len(sys.argv) > 1 else None
+    ensure_env(None)  # make sure .env exists with a real JWT_SECRET
+
+    if given:
+        import os
+
+        os.environ["DATABASE_URL"] = given  # takes priority over .env for this run
 
     from app.core.config import get_settings
 
@@ -59,6 +66,9 @@ def main() -> None:
             "Check that PostgreSQL is running and that the username/password in DATABASE_URL are right.\n"
             'Re-run with your URL:  python scripts/setup_db.py "postgresql+psycopg://USER:PASSWORD@localhost:5432/memory_lane"'
         )
+
+    if given:
+        ensure_env(given)  # connection worked, so it is now safe to remember this URL
 
     from app.database.session import init_db
 

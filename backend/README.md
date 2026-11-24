@@ -8,13 +8,13 @@ uvicorn app.main:app --reload --port 8000
 ```
 Check: http://localhost:8000/api/health  ·  Docs: http://localhost:8000/docs
 
-## Database
-Create a PostgreSQL database and put its URL in `.env`:
+## Database (one command)
+With PostgreSQL running, from `backend/`:
+```bash
+python scripts/setup_db.py "postgresql+psycopg://postgres:YOUR_PASSWORD@localhost:5432/memory_lane"
 ```
-DATABASE_URL=postgresql+psycopg://USER:PASSWORD@localhost:5432/memory_lane
-```
-Tables are created automatically on startup. Set a long random `JWT_SECRET`
-(e.g. `python -c "import secrets; print(secrets.token_urlsafe(48))"`).
+This creates `.env` (with a generated `JWT_SECRET`), creates the `memory_lane` database if it
+doesn't exist, and creates the tables. Safe to run again. After the first run you can omit the URL.
 
 ## Tests
 `pytest` (uses a throwaway SQLite file, so no PostgreSQL needed).
